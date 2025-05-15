@@ -1,0 +1,38 @@
+.shop {
+    padding: 2rem;
+  }
+  
+  .filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .searchInput {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.5rem;
+    border: 1px solid var(--clr-light-gray);
+    border-radius: 4px;
+  }
+  
+  .filterSelect {
+    padding: 0.5rem;
+    border: 1px solid var(--clr-light-gray);
+    border-radius: 4px;
+    background-color: white;
+  }
+  
+  .productGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .noProducts {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    color: var(--clr-gray);
+  }

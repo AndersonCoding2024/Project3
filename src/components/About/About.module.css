@@ -1,0 +1,54 @@
+.about {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .aboutUs {
+    margin-bottom: 3rem;
+  }
+  
+  .aboutUs h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .aboutUs p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  .faq h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .faqList {
+    border-top: 1px solid var(--clr-light-gray);
+  }
+  
+  .faqItem {
+    border-bottom: 1px solid var(--clr-light-gray);
+  }
+  
+  .faqQuestion {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 0;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .faqQuestion:hover {
+    color: var(--clr-primary);
+  }
+  
+  .faqAnswer {
+    padding: 0 0 1rem;
+    line-height: 1.6;
+  }

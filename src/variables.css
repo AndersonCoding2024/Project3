@@ -1,0 +1,31 @@
+:root {
+  /** Layouts **/
+  --layout-mobile: 375px;
+  --layout-desktop: 1440px;
+
+  /** Colours **/
+  --clr-primary: #4a6fa5;
+  --clr-primary-light: #6d8fc7;
+  --clr-primary-dark: #2a4a7a;
+  --clr-accent: #ff7e5f;
+  --clr-accent-light: #ff9e85;
+  --clr-accent-dark: #e65e3d;
+  --clr-light: #f8f9fa;
+  --clr-dark: #212529;
+  --clr-gray: #6c757d;
+  --clr-light-gray: #e9ecef;
+  --clr-dark-gray: #343a40;
+  --clr-success: #28a745;
+  --clr-success-dark: #1e7e34;
+  --clr-danger: #dc3545;
+  --clr-danger-dark: #bd2130;
+
+  /** Typography **/
+  --font-paragraph: 16px; 
+  --font-heading: 2rem;
+
+  --fw-regular: 400;
+  --fw-bold: 700;
+
+  --ff-base: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
