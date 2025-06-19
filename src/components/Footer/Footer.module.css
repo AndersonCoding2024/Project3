@@ -41,6 +41,24 @@
   .footerSection ul li:hover {
     color: var(--clr-primary-light);
   }
+
+  /* Quick Link buttons */
+.footerSection ul li button {
+  background: var(--clr-dark);  /* Same as Footer */
+  color: white;
+  border: none;
+  padding: 0;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.footerSection ul li button:hover {
+  color: var(--clr-primary-light); /* Text changes color on hover. */
+}
   
   .socialIcons {
     display: flex;

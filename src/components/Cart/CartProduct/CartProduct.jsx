@@ -1,6 +1,25 @@
 import styles from './CartProduct.module.css';
+import { toast } from 'react-toastify';
 
 const CartProduct = ({ item, onQuantityChange, onRemove }) => {
+  const handleIncrease = () => {
+    if (item.quantity >= item.stock) {
+      toast.warn(`Only ${item.stock} in stock. You can't add more.`, {
+        toastId: `stock-limit-${item.id}`
+      });
+      return;
+    }
+    onQuantityChange(item.id, item.quantity + 1);
+  };
+
+  const handleDecrease = () => {
+    if (item.quantity > 1) {
+      onQuantityChange(item.id, item.quantity - 1);
+    } else {
+      onRemove(item.id);
+    }
+  };
+
   return (
     <div className={styles.cartProduct}>
       <div className={styles.productImageContainer}>
@@ -14,14 +33,14 @@ const CartProduct = ({ item, onQuantityChange, onRemove }) => {
         <div className={styles.quantityControl}>
           <button 
             className={styles.quantityButton}
-            onClick={() => onQuantityChange(item.id, item.quantity - 1)}
+            onClick={handleDecrease}
           >
             −
           </button>
           <span className={styles.quantity}>{item.quantity}</span>
           <button 
             className={styles.quantityButton}
-            onClick={() => onQuantityChange(item.id, item.quantity + 1)}
+            onClick={handleIncrease}
           >
             +
           </button>

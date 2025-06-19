@@ -32,7 +32,7 @@ const About = () => {
       <section className={styles.aboutUs}>
         <h1>About ShopEase</h1>
         <p>
-          ShopEase was founded in 2023 with the mission to provide high-quality products 
+          ShopEase was founded in 2024 with the mission to provide high-quality products 
           at affordable prices with exceptional customer service.
         </p>
         <p>

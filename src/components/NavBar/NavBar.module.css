@@ -15,11 +15,16 @@
   }
 
   .logoImage {
-    height: 40px; /* Điều chỉnh kích thước phù hợp */
+    height: 40px; 
     width: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .logo:hover .logoImage {
+    transform: scale(1.05);
   }
   
-  /* Hoặc nếu bạn muốn logo responsive */
+  /* Logo responsive */
   .logoImage {
     max-height: 100px;
     max-width: 100%;
@@ -28,10 +33,50 @@
   
   .navLinks {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .navLink {
+    color: white;
+    text-decoration: none;
+    font-weight: var(--fw-bold);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: inherit; /* ensure same font */
   }
   
-  .navLinks button {
+  /* Hover for nav */
+.navLink:hover {
+  background-color: var(--clr-primary-dark); 
+  transform: translateY(-2px);
+}
+
+/* Underline on hover */
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.navLink:hover::after {
+  width: 70%;
+  left: 15%;
+}
+
+  .cartButton {
+    position: relative;
     background: none;
     border: none;
     color: white;
@@ -39,17 +84,49 @@
     cursor: pointer;
     padding: 0.5rem 1rem;
     border-radius: 4px;
-    transition: background-color 0.3s;
+    height: 100%;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
   }
+
+  /* Underline effect */
+.cartButton::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.cartButton:hover::before {
+  width: 70%; /* Underline with 70% of the button’s width */
+}
   
-  .navLinks button:hover {
+  /* Hover effect for the cart button */
+  .cartButton:hover {
     background-color: var(--clr-primary-dark);
+    transform: scale(1.2);
   }
-  
-  .cartButton {
-    position: relative;
+
+  .cartButton::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: all 0.3s ease;
   }
-  
+
   .cartCount {
     position: absolute;
     top: -8px;
@@ -64,3 +141,19 @@
     align-items: center;
     font-size: 0.75rem;
   }
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+  
+  .navLinks {
+    gap: 1rem;
+  }
+  
+  .navLink {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}

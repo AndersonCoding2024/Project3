@@ -1,12 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, updateQuantity, clearCart } from '../../store/slices/cartSlice';
 import { updateStock } from '../../store/slices/productsSlice';
-import { setPage } from '../../store/slices/pageSlice';
+import { useNavigate } from 'react-router-dom';  
 import CartProduct from './CartProduct/CartProduct';
 import styles from './Cart.module.css';
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();  
   const cart = useSelector(state => state.cart);
   
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -29,7 +30,7 @@ const Cart = () => {
       dispatch(updateStock({ id: item.id, quantity: item.quantity }));
     });
     dispatch(clearCart());
-    dispatch(setPage('home'));
+    navigate('/'); // Change from dispatch(setPage('home')) to navigate('/')
     alert('Thank you for your purchase!');
   };
 
@@ -42,7 +43,7 @@ const Cart = () => {
           <p>Your cart is empty</p>
           <button 
             className={styles.continueShopping}
-            onClick={() => dispatch(setPage('shop'))}
+            onClick={() => navigate('/shop')} // Change from dispatch(setPage('shop')) to navigate('/shop')
           >
             Continue Shopping
           </button>

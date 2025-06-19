@@ -1,16 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addToCart } from '../../store/slices/cartSlice';
+import { loadProducts, selectAllProducts, selectProductsLoading, selectProductsError } from '../../store/slices/productsSlice';
 import Product from './Product/Product';
 import styles from './Shop.module.css';
 
 const Shop = () => {
   const dispatch = useDispatch();
-  const products = useSelector(state => state.products);
+  const products = useSelector(selectAllProducts);
+  const loading = useSelector(selectProductsLoading);
+  const error = useSelector(selectProductsError);
   
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [sortBy, setSortBy] = useState('default');
+
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, [dispatch]);
 
   // Get unique categories
   const categories = ['all', ...new Set(products.map(product => product.category))];
@@ -37,11 +43,13 @@ const Shop = () => {
       }
     });
 
-  const handleAddToCart = (product) => {
-    if (product.stock > 0) {
-      dispatch(addToCart(product));
-    }
-  };
+  if (loading) {
+    return <div className={styles.loading}>Loading products...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.error}>Error: {error}</div>;
+  }
 
   return (
     <div className={styles.shop}>
@@ -85,7 +93,6 @@ const Shop = () => {
             <Product 
               key={product.id} 
               product={product} 
-              onAddToCart={() => handleAddToCart(product)} 
             />
           ))
         ) : (
