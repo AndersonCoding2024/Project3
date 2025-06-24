@@ -1,9 +1,11 @@
+// src/components/Cart/Cart.jsx
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, updateQuantity, clearCart } from '../../store/slices/cartSlice';
 import { updateStock } from '../../store/slices/productsSlice';
 import { useNavigate } from 'react-router-dom';  
 import CartProduct from './CartProduct/CartProduct';
 import styles from './Cart.module.css';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -11,7 +13,7 @@ const Cart = () => {
   const cart = useSelector(state => state.cart);
   
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const handleQuantityChange = (id, newQuantity) => {
     if (newQuantity > 0) {
@@ -26,12 +28,22 @@ const Cart = () => {
   };
 
   const handlePurchase = () => {
+    if (cart.length === 0) {
+      toast.warn("Your cart is empty.");
+      return;
+    }
+
+    // 1. Update stock for each item
     cart.forEach(item => {
       dispatch(updateStock({ id: item.id, quantity: item.quantity }));
     });
+
+    // 2. Clear cart
     dispatch(clearCart());
-    navigate('/'); // Change from dispatch(setPage('home')) to navigate('/')
-    alert('Thank you for your purchase!');
+
+    // 3. Navigate and notify
+    toast.success("Thank you for your purchase!");
+    navigate('/'); // Redirect to homepage
   };
 
   return (
@@ -43,7 +55,7 @@ const Cart = () => {
           <p>Your cart is empty</p>
           <button 
             className={styles.continueShopping}
-            onClick={() => navigate('/shop')} // Change from dispatch(setPage('shop')) to navigate('/shop')
+            onClick={() => navigate('/shop')}
           >
             Continue Shopping
           </button>

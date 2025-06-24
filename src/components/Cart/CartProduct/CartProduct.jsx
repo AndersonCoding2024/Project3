@@ -1,3 +1,4 @@
+// src/components/Cart/CartProduct/CartProduct.jsx
 import styles from './CartProduct.module.css';
 import { toast } from 'react-toastify';
 
@@ -23,17 +24,22 @@ const CartProduct = ({ item, onQuantityChange, onRemove }) => {
   return (
     <div className={styles.cartProduct}>
       <div className={styles.productImageContainer}>
-        <img src={item.image} alt={item.name} className={styles.productImage} />
+        <img 
+          src={item.image || '/images/default.webp'} 
+          alt={item.name} 
+          className={styles.productImage} 
+        />
       </div>
-      
+
       <div className={styles.productDetails}>
         <h3 className={styles.productName}>{item.name}</h3>
         <p className={styles.productPrice}>${item.price.toFixed(2)}</p>
-        
+
         <div className={styles.quantityControl}>
           <button 
             className={styles.quantityButton}
             onClick={handleDecrease}
+            aria-label="Decrease quantity"
           >
             −
           </button>
@@ -41,12 +47,13 @@ const CartProduct = ({ item, onQuantityChange, onRemove }) => {
           <button 
             className={styles.quantityButton}
             onClick={handleIncrease}
+            aria-label="Increase quantity"
           >
             +
           </button>
         </div>
       </div>
-      
+
       <div className={styles.productTotal}>
         <p>${(item.price * item.quantity).toFixed(2)}</p>
         <button 

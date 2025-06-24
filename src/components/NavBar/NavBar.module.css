@@ -1,58 +1,72 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: var(--clr-primary);
-    color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-  }
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--clr-primary);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
 
-  .logoImage {
-    height: 40px; 
-    width: auto;
-    transition: transform 0.3s ease;
-  }
+.navLinks {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  flex-grow: 1; 
+  align-items: center;
+}
 
-  .logo:hover .logoImage {
-    transform: scale(1.05);
-  }
-  
-  /* Logo responsive */
-  .logoImage {
-    max-height: 100px;
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .navLinks {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-  }
+.cartButton {
+  flex-shrink: 0;
+}
 
-  .navLink {
-    color: white;
-    text-decoration: none;
-    font-weight: var(--fw-bold);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    position: relative;
-    background: none;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
-    font-family: inherit; /* ensure same font */
-  }
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.logoImage {
+  height: 40px; 
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover .logoImage {
+  transform: scale(1.05);
+}
   
-  /* Hover for nav */
+/* Logo responsive */
+.logoImage {
+  max-height: 100px;
+  max-width: 100%;
+  height: auto;
+}
+  
+.navLinks {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+.navLink {
+  color: white;
+  text-decoration: none;
+  font-weight: var(--fw-bold);
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+  background: none;
+  border: none;
+  font-size: 1.05rem;
+  cursor: pointer;
+  font-family: inherit; /* ensure same font */
+}
+  
+/* Hover for nav */
 .navLink:hover {
   background-color: var(--clr-primary-dark); 
   transform: translateY(-2px);
@@ -75,25 +89,25 @@
   left: 15%;
 }
 
-  .cartButton {
-    position: relative;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    height: 100%;
-    min-width: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-  }
+.cartButton {
+  position: relative;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  height: 100%;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
 
-  /* Underline effect */
+/* Underline effect */
 .cartButton::before {
   content: '';
   position: absolute;
@@ -110,50 +124,50 @@
   width: 70%; /* Underline with 70% of the button’s width */
 }
   
-  /* Hover effect for the cart button */
-  .cartButton:hover {
-    background-color: var(--clr-primary-dark);
-    transform: scale(1.2);
-  }
+/* Hover effect for the cart button */
+.cartButton:hover {
+  background-color: var(--clr-primary-dark);
+  transform: scale(1.2);
+}
 
-  .cartButton::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: white;
-    transition: all 0.3s ease;
-  }
+.cartButton::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease;
+}
 
-  .cartCount {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background-color: var(--clr-accent);
-    color: white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.75rem;
-  }
+.cartCount {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--clr-accent);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+}
 
 /* Responsive for mobile */
 @media (max-width: 768px) {
-  .navbar {
-    padding: 1rem;
-  }
-  
-  .navLinks {
-    gap: 1rem;
-  }
-  
-  .navLink {
-    padding: 0.5rem;
-    font-size: 0.9rem;
-  }
+.navbar {
+  padding: 1rem;
+}
+
+.navLinks {
+  gap: 1rem;
+}
+
+.navLink {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
 }

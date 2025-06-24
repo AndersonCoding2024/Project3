@@ -1,6 +1,12 @@
+// src/components/Shop/Shop.jsx
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadProducts, selectAllProducts, selectProductsLoading, selectProductsError } from '../../store/slices/productsSlice';
+import {
+  loadProducts,
+  selectAllProducts,
+  selectProductsLoading,
+  selectProductsError
+} from '../../store/slices/productsSlice';
 import Product from './Product/Product';
 import styles from './Shop.module.css';
 
@@ -9,19 +15,19 @@ const Shop = () => {
   const products = useSelector(selectAllProducts);
   const loading = useSelector(selectProductsLoading);
   const error = useSelector(selectProductsError);
-  
+
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [sortBy, setSortBy] = useState('default');
 
   useEffect(() => {
-    dispatch(loadProducts());
-  }, [dispatch]);
+    if (products.length === 0) {
+      dispatch(loadProducts());
+    }
+  }, [dispatch, products.length]);
 
-  // Get unique categories
   const categories = ['all', ...new Set(products.map(product => product.category))];
 
-  // Filter and sort products
   const filteredProducts = products
     .filter(product => {
       const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -61,7 +67,7 @@ const Shop = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className={styles.searchInput}
         />
-        
+
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
@@ -73,7 +79,7 @@ const Shop = () => {
             </option>
           ))}
         </select>
-        
+
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
@@ -86,14 +92,11 @@ const Shop = () => {
           <option value="price-desc">Price (High to Low)</option>
         </select>
       </div>
-      
+
       <div className={styles.productGrid}>
         {filteredProducts.length > 0 ? (
           filteredProducts.map(product => (
-            <Product 
-              key={product.id} 
-              product={product} 
-            />
+            <Product key={product.id} product={product} />
           ))
         ) : (
           <p className={styles.noProducts}>No products found matching your criteria.</p>

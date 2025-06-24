@@ -19,11 +19,13 @@ const NavBar = () => {
         <Link to="/" className={styles.navLink}>Home</Link>
         <Link to="/shop" className={styles.navLink}>Shop</Link>
         <Link to="/about" className={styles.navLink}>About</Link>
-        <Link to="/cart" className={styles.cartButton}>
-          <FaShoppingCart />
-          {cartCount > 0 && <span className={styles.cartCount}>{cartCount}</span>}
-        </Link>
       </div>
+      
+      <Link to="/cart" className={styles.cartButton}>
+        <FaShoppingCart />
+        {cartCount > 0 && <span className={styles.cartCount}>{cartCount}</span>}
+      </Link>
+      
     </nav>
   );
 };

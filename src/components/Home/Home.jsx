@@ -1,27 +1,29 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { loadProducts, selectAllProducts } from '../../store/slices/productsSlice';
 import Product from '../Shop/Product/Product';
 import styles from './Home.module.css';
 
-// Function to randomly select n elements from an array.
-const getRandomProducts = (products, n) => {
-  const shuffled = [...products].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, n);
-};
-
 const Home = () => {
   const dispatch = useDispatch();
   const products = useSelector(selectAllProducts);
-  
+  const cartItems = useSelector(state => state.cart);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+
   useEffect(() => {
     if (products.length === 0) {
       dispatch(loadProducts());
+    } else if (featuredProducts.length === 0) {
+      // Only fetch random products when there are no featured products.
+      const shuffled = [...products].filter(p => p.image).sort(() => 0.5 - Math.random());
+      setFeaturedProducts(shuffled.slice(0, 3));
     }
-  }, [dispatch, products.length]);
+  }, [dispatch, products, featuredProducts.length]);
 
-  const featuredProducts = getRandomProducts(products, 3);
+  const isProductInCart = (productId) => {
+    return cartItems.some(item => item.id === productId);
+  };
 
   return (
     <div className={styles.home}>
@@ -41,6 +43,7 @@ const Home = () => {
               <Product
                 key={product.id}
                 product={product}
+                isInCart={isProductInCart(product.id)}
               />
             ))
           ) : (

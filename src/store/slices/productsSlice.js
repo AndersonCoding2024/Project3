@@ -1,3 +1,4 @@
+// src/store/slices/productsSlice.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchProducts } from '../../api/productsApi';
 
@@ -26,7 +27,7 @@ const productsSlice = createSlice({
       const { id, quantity } = action.payload;
       const product = state.items.find(item => item.id === id);
       if (product) {
-        product.stock = Math.max(0, product.stock - quantity); // Ensure stock is not negative
+        product.stock = Math.max(0, product.stock - quantity);
       }
     }
   },
@@ -37,12 +38,15 @@ const productsSlice = createSlice({
         state.error = null;
       })
       .addCase(loadProducts.fulfilled, (state, action) => {
+        // Prevent overwriting updated stock if already loaded
+        if (state.items.length === 0) {
+          state.items = action.payload.map(item => ({
+            ...item,
+            image: item.image || `/images/${item.id}.webp`
+          }));
+          state.lastFetch = Date.now();
+        }
         state.loading = false;
-        state.items = action.payload.map(item => ({
-          ...item,
-          image: item.image || `/images/${item.id}.webp` // Fallback if there is no image
-        }));
-        state.lastFetch = Date.now();
       })
       .addCase(loadProducts.rejected, (state, action) => {
         state.loading = false;
@@ -55,8 +59,8 @@ export const { updateStock } = productsSlice.actions;
 export default productsSlice.reducer;
 
 // Selectors
-export const selectAllProducts = (state) => state.products.items.filter(p => p.stock > 0);
+export const selectAllProducts = (state) => state.products.items;
 export const selectProductsLoading = (state) => state.products.loading;
 export const selectProductsError = (state) => state.products.error;
-export const selectProductById = (id) => (state) => 
+export const selectProductById = (id) => (state) =>
   state.products.items.find(product => product.id === id);
